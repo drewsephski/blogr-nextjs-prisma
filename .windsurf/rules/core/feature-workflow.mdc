@@ -1,0 +1,117 @@
+---
+description: Strict lifecycle workflow for any feature, bug fix, or refactor. Enforces plan → implement → verify → confirm for every task.
+trigger: feature, implement, build, refactor, fix, bug, task, add, create, update
+---
+
+# Feature Workflow Lifecycle
+
+Every task — regardless of size — must follow this lifecycle. Do not skip steps.
+
+---
+
+## Phase 1: Analyze
+
+Before writing any code:
+
+1. **Explore the codebase**
+   - Use `code_search` or `grep_search` to find relevant files, patterns, and prior art.
+   - Read existing implementations in the same domain.
+   - Identify shared utilities, hooks, components, and validation schemas.
+
+2. **Verify APIs and patterns**
+   - Use **Context7** to confirm framework/library APIs before using them.
+   - Use **Exa** for external research if comparing approaches.
+   - Check the Next.js dev server via **Next.js DevTools MCP** if applicable.
+
+3. **Classify the task**
+   - **Bug Fix** → minimal targeted change
+   - **Refactor** → preserve behavior, verify with tests
+   - **New Feature** → integrate with existing patterns first
+   - **Performance** → measure before and after
+   - **Architecture Change** → requires ADR and migration plan
+   - **UI/UX** → match existing design system
+
+4. **Produce a concise implementation plan**
+   - List affected files and systems.
+   - Identify server/client boundaries.
+   - Note dependencies and reusable abstractions.
+   - Flag potential regressions.
+   - Prefer the smallest viable plan.
+
+---
+
+## Phase 2: Implement
+
+1. **Match existing conventions**
+   - Use the same naming, patterns, and architecture as the surrounding code.
+   - Do not introduce competing patterns into the same subsystem.
+   - Reuse existing utilities, hooks, and validation schemas.
+
+2. **Incremental changes only**
+   - Make the smallest effective change.
+   - Do not rewrite large files unnecessarily.
+   - Avoid changing unrelated code.
+   - Preserve stable APIs unless explicitly refactoring.
+
+3. **Write code, not placeholders**
+   - Finish incomplete implementations fully.
+   - Do not fabricate APIs, packages, or framework features.
+   - Verify imports and paths before generating code.
+   - Explain architectural decisions when introducing new patterns.
+
+4. **Keep server/client boundaries clean**
+   - Default to Server Components.
+   - Only use `"use client"` when interactivity is required.
+   - Keep sensitive logic and secrets server-side.
+   - Validate all external inputs with Zod or Valibot.
+
+---
+
+## Phase 3: Verify
+
+Before declaring a task complete, run this checklist:
+
+1. **TypeScript** — `tsc --noEmit` or project-specific typecheck passes.
+2. **Lint** — `next lint` or project-specific lint passes.
+3. **Runtime** — no hydration errors, no console warnings, no unhandled exceptions.
+4. **Imports** — all imports resolve correctly.
+5. **Tests** — relevant unit, integration, or E2E tests pass.
+6. **MCP inspection** — if using Next.js DevTools MCP, confirm `get_errors` returns clean.
+7. **Playwright** — if UI changed, run affected specs; inspect trace on failure.
+8. **Pattern match** — implementation follows existing project conventions.
+
+If verification fails:
+1. Inspect logs and runtime errors.
+2. Identify root cause before modifying additional code.
+3. Avoid stacking speculative fixes.
+4. Revert ineffective changes quickly.
+5. Prefer one verified fix at a time.
+
+---
+
+## Phase 4: Confirm
+
+A task is complete only when:
+
+- TypeScript passes.
+- Lint passes.
+- Relevant tests pass.
+- The feature works end-to-end.
+- No placeholder code remains.
+- No obvious regressions were introduced.
+- The implementation follows existing project conventions.
+
+After confirming completion, report:
+- What was implemented.
+- Files changed.
+- Any remaining risks or known issues.
+- Suggestions for follow-up work (if any).
+
+---
+
+## Rules of Thumb
+
+- When in doubt, verify with MCP tools before guessing.
+- Prefer observing real runtime behavior over static reasoning.
+- Never skip Phase 1 for tasks touching >3 files or crossing server/client boundaries.
+- If a task grows beyond its original scope, pause and re-plan.

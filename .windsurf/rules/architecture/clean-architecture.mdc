@@ -1,0 +1,15 @@
+---
+description: Clean Architecture layer separation, dependency rule, and repository pattern. Apply selectively.
+trigger: Clean Architecture, layer, entity, use case, port, adapter, repository, mapper, DTO, dependency rule, CQRS
+---
+
+# Clean Architecture (Apply Selectively)
+
+- Separate code into layers: **entities, use cases, interfaces, frameworks**.
+- Enforce the **Dependency Rule**: code dependencies must point inward. Inner layers know nothing of outer layers.
+- Domain entities must encapsulate business rules with **zero framework dependencies**.
+- Use **interfaces (ports)** and **implementations (adapters)** to isolate external dependencies (databases, HTTP clients, third-party APIs).
+- Create **use cases** that orchestrate entity interactions for specific business operations.
+- Implement **mappers/DTOs** to transform data between layers.
+- Apply the **Repository pattern** to abstract data access.
+- Keep framework-specific code (React, Next.js, Express) in the outermost **interface adapter** layer only.

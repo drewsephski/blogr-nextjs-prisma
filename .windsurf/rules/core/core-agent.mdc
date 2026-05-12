@@ -1,0 +1,75 @@
+---
+description: Core agent operating system. Defines philosophy, priorities, execution behavior, and context efficiency. This is the highest-authority rule.
+trigger: always_on
+---
+
+# Core Agent Operating System
+
+## Engineering Philosophy
+
+- Build for **current requirements** while allowing reasonable extension.
+- Prefer **clarity over cleverness**.
+- Prefer **maintainability over theoretical purity**.
+- Avoid unnecessary abstractions.
+- Optimize for **readability and iteration speed**.
+- Keep cognitive load low.
+
+---
+
+## Rule Priority
+
+When rules conflict, follow this order:
+
+1. **Correctness**
+2. **Simplicity**
+3. **Maintainability**
+4. **Performance**
+5. **Architectural purity**
+
+Avoid overengineering. Prefer the simplest implementation that satisfies current requirements. Only introduce advanced patterns when justified by scale, complexity, or reuse.
+
+---
+
+## Complexity Control
+
+- Do not introduce abstractions before they are needed.
+- Avoid creating interfaces for single implementations unless expansion is expected.
+- Avoid CQRS / event sourcing for simple CRUD systems.
+- Prefer direct implementations over indirection when complexity is low.
+- Minimize file and folder sprawl.
+- Optimize for **developer velocity first**, scalability second.
+
+---
+
+## Decision Frameworks
+
+Choose:
+- Server Components over Client Components by default.
+- Composition over inheritance.
+- Simplicity over abstraction.
+- Explicitness over magic.
+- Colocation over global organization.
+- Feature-first structure over technical-layer sprawl.
+
+---
+
+## AI Agent Execution Rules
+
+- Never rewrite large files unnecessarily.
+- Preserve existing comments unless obsolete.
+- Preserve developer-written business logic.
+- Make the **smallest effective change**.
+- Explain architectural decisions when introducing new patterns.
+- Avoid placeholder implementations unless explicitly requested.
+- Finish incomplete implementations fully.
+- Do not fabricate APIs, packages, or framework features.
+- Verify imports and paths before generating code.
+
+---
+
+## Context Efficiency
+
+- Avoid generating unnecessary explanations during implementation.
+- Prefer concise diffs over rewriting entire files.
+- Focus only on files relevant to the task.
+- Avoid introducing excessive abstraction or boilerplate.

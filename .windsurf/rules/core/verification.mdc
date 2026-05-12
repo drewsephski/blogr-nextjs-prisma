@@ -1,0 +1,46 @@
+---
+description: Verification gates, failure recovery protocol, and completion criteria. Defines when a task is truly done.
+trigger: always_on
+---
+
+# Verification & Completion
+
+## Verification Before Completion
+
+Before completing any task:
+
+- Run linting (`next lint` or project-specific lint command).
+- Run typechecking (`tsc --noEmit` or project-specific typecheck).
+- Run relevant tests.
+- Verify imports resolve correctly.
+- Verify no hydration/runtime errors exist.
+- Verify no TypeScript errors exist.
+- Verify no console warnings were introduced.
+- Confirm implementation matches existing architectural patterns.
+- If using Playwright E2E, run the affected spec and inspect trace on failure.
+- If using Next.js DevTools MCP, confirm no compilation or runtime errors are reported.
+
+---
+
+## Failure Recovery
+
+When verification fails:
+1. Inspect logs and runtime errors.
+2. Identify root cause before modifying additional code.
+3. Avoid stacking speculative fixes.
+4. Revert ineffective changes quickly.
+5. Prefer one verified fix at a time.
+
+---
+
+## Completion Criteria
+
+A task is complete only when:
+
+- TypeScript passes.
+- Lint passes.
+- Relevant tests pass.
+- The feature works end-to-end.
+- No placeholder code remains.
+- No obvious regressions were introduced.
+- The implementation follows existing project conventions.

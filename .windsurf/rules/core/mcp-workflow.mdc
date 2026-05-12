@@ -1,0 +1,39 @@
+---
+description: MCP-first tooling workflow. Instructs the agent to verify APIs and debug via MCP tools before writing or modifying code.
+trigger: always_on
+---
+
+# MCP Tooling Workflow
+
+When working with this codebase, **always use available MCP tools** before guessing or generating code from memory. This ensures accuracy and prevents hallucinated APIs.
+
+## Documentation & Research
+
+- **Context7**: Use for all library/framework questions before writing code. Query docs for React, Next.js, Zustand, Playwright, Tailwind CSS, or any other dependency to verify APIs and best practices.
+- **Exa**: Use for web research when comparing approaches, finding current patterns, or researching third-party services.
+- **Next.js DevTools MCP**: When working with Next.js, call `nextjs_index` and `nextjs_call` to inspect routes, errors, and build status from the running dev server.
+
+## Debugging & Testing
+
+- **Next.js DevTools**: Use `get_errors` and `get_compilation_errors` to see runtime and build errors directly from the dev server.
+- **Playwright MCP**: Use browser automation (`browser_eval`, `browser_navigate`, `browser_snapshot`, `console_messages`) to verify UI behavior, capture screenshots, and reproduce issues in a real browser.
+- **Playwright CLI**: When testing in terminal:
+  - `npx playwright test`
+  - `npx playwright codegen`
+  - `npx playwright show-trace`
+  - `npx playwright test --ui`
+  - `npx playwright install`
+
+## Search & Code Understanding
+
+- **Code Search (`code_search`)**: Use as the first step when exploring the codebase to find relevant files and patterns.
+- **Grep (`grep_search`)**: Use for targeted searches across the codebase.
+- **Fast Context**: Use to locate line ranges and files efficiently.
+
+## Rules of Thumb
+
+1. Verify APIs with Context7 before using them.
+2. Reproduce UI bugs with Playwright MCP or CLI before fixing.
+3. Inspect Next.js errors with DevTools MCP before modifying code.
+4. Capture console errors, network failures, hydration issues, and accessibility violations before modifying code.
+5. Prefer observing real runtime behavior over static reasoning.

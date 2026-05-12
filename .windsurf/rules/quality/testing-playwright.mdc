@@ -1,0 +1,20 @@
+---
+description: Playwright E2E testing best practices, POM, locators, visual regression, trace viewer, and parallel execution.
+trigger: Playwright, E2E, test, spec, POM, Page Object Model, locator, toHaveScreenshot, codegen, trace, browser context, storage state, soft assertion
+---
+
+# Playwright (E2E)
+
+- Initialize targeting **Chromium/Desktop Chrome**.
+- Rely on automatic **browser context isolation** per test.
+- Follow the **Page Object Model (POM)**.
+- Use **locators** (`getByRole`, `getByTestId`) over CSS selectors.
+- Validate backend via **API testing** where possible.
+- Use `expect(page).toHaveScreenshot()` for visual regression.
+- Use `codegen` for rapid recording, then refactor into POMs.
+- Use the **trace viewer** for debugging failures.
+- Implement `test.beforeEach` / `test.afterEach` hooks.
+- Use **web-first assertions** (`toBeVisible`, `toHaveText`).
+- Run tests in parallel (`workers: process.env.CI ? 4 : undefined`).
+- Isolate authenticated states with **storage states**.
+- Use **soft assertions** (`expect.soft`) for non-blocking validation of multiple independent conditions.

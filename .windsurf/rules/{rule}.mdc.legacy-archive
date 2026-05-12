@@ -1,0 +1,591 @@
+---
+description: Enforces architecture, React/Next.js, state management, and testing standards for {{project-name}}.
+trigger: always_on
+---
+
+# AI Rules for {{project-name}}
+
+{{project-description}}
+
+---
+
+## Engineering Philosophy
+
+- Build for **current requirements** while allowing reasonable extension.
+- Prefer **clarity over cleverness**.
+- Prefer **maintainability over theoretical purity**.
+- Avoid unnecessary abstractions.
+- Optimize for **readability and iteration speed**.
+- Keep cognitive load low.
+
+---
+
+## Rule Priority
+
+When rules conflict, follow this order:
+
+1. **Correctness**
+2. **Simplicity**
+3. **Maintainability**
+4. **Performance**
+5. **Architectural purity**
+
+Avoid overengineering. Prefer the simplest implementation that satisfies current requirements. Only introduce advanced patterns when justified by scale, complexity, or reuse.
+
+---
+
+## Complexity Control
+
+- Do not introduce abstractions before they are needed.
+- Avoid creating interfaces for single implementations unless expansion is expected.
+- Avoid CQRS / event sourcing for simple CRUD systems.
+- Prefer direct implementations over indirection when complexity is low.
+- Minimize file and folder sprawl.
+- Optimize for **developer velocity first**, scalability second.
+
+---
+
+## Decision Frameworks
+
+Choose:
+- Server Components over Client Components by default.
+- Composition over inheritance.
+- Simplicity over abstraction.
+- Explicitness over magic.
+- Colocation over global organization.
+- Feature-first structure over technical-layer sprawl.
+
+---
+
+## AI Agent Execution Rules
+
+- Never rewrite large files unnecessarily.
+- Preserve existing comments unless obsolete.
+- Preserve developer-written business logic.
+- Make the **smallest effective change**.
+- Explain architectural decisions when introducing new patterns.
+- Avoid placeholder implementations unless explicitly requested.
+- Finish incomplete implementations fully.
+- Do not fabricate APIs, packages, or framework features.
+- Verify imports and paths before generating code.
+
+---
+
+## Context Efficiency
+
+- Avoid generating unnecessary explanations during implementation.
+- Prefer concise diffs over rewriting entire files.
+- Focus only on files relevant to the task.
+- Avoid introducing excessive abstraction or boilerplate.
+
+---
+
+## AI Agent MCP Tooling Workflow
+
+When working with this codebase, **always use available MCP tools** before guessing or generating code from memory. This ensures accuracy and prevents hallucinated APIs.
+
+### Documentation & Research
+- **Context7**: Use for all library/framework questions before writing code. Query docs for React, Next.js, Zustand, Playwright, Tailwind CSS, or any other dependency to verify APIs and best practices.
+- **Exa**: Use for web research when comparing approaches, finding current patterns, or researching third-party services.
+- **Next.js DevTools MCP**: When working with Next.js, call `nextjs_index` and `nextjs_call` to inspect routes, errors, and build status from the running dev server.
+
+### Debugging & Testing
+- **Next.js DevTools**: Use `get_errors` and `get_compilation_errors` to see runtime and build errors directly from the dev server.
+- **Playwright MCP**: Use browser automation (`browser_eval`, `browser_navigate`, `browser_snapshot`, `console_messages`) to verify UI behavior, capture screenshots, and reproduce issues in a real browser.
+- **Playwright CLI**: When testing in terminal:
+  - `npx playwright test`
+  - `npx playwright codegen`
+  - `npx playwright show-trace`
+  - `npx playwright test --ui`
+  - `npx playwright install`
+
+### Search & Code Understanding
+- **Code Search (`code_search`)**: Use as the first step when exploring the codebase to find relevant files and patterns.
+- **Grep (`grep_search`)**: Use for targeted searches across the codebase.
+- **Fast Context**: Use to locate line ranges and files efficiently.
+
+### Rules of Thumb
+1. Verify APIs with Context7 before using them.
+2. Reproduce UI bugs with Playwright MCP or CLI before fixing.
+3. Inspect Next.js errors with DevTools MCP before modifying code.
+4. Capture console errors, network failures, hydration issues, and accessibility violations before modifying code.
+5. Prefer observing real runtime behavior over static reasoning.
+
+---
+
+## Confidence & Verification
+
+- If uncertain about an API or framework behavior, verify with MCP tools or official documentation.
+- Do not assume undocumented framework behavior.
+- Escalate uncertainty through comments or notes rather than fabricating implementations.
+- Prefer explicit verification over probabilistic guessing.
+
+---
+
+## Debugging Hierarchy
+
+When debugging:
+1. Check runtime errors.
+2. Check TypeScript errors.
+3. Check imports and paths.
+4. Check environment variables.
+5. Check server/client boundaries.
+6. Check async data flow.
+7. Check framework conventions.
+8. Check external dependencies last.
+
+Do not assume framework bugs before verifying implementation errors.
+
+---
+
+## Before Writing Code
+
+Before implementing:
+1. Analyze existing patterns in the codebase.
+2. Reuse existing abstractions when possible.
+3. Identify whether functionality already exists.
+4. Minimize duplicate logic.
+5. Prefer modifying existing code over creating parallel systems.
+
+---
+
+## Task Classification
+
+Before implementation, classify the task:
+
+- **Bug Fix**
+- **Refactor**
+- **New Feature**
+- **Performance Optimization**
+- **Architecture Change**
+- **Dependency Upgrade**
+- **UI/UX Improvement**
+- **Test Coverage**
+- **DevOps / Infrastructure**
+
+Adjust implementation scope accordingly:
+- Bug fixes → minimal targeted changes.
+- Refactors → preserve behavior.
+- New features → integrate with existing patterns first.
+- Architecture changes → require ADRs and migration planning.
+
+---
+
+## Planning Requirements
+
+Before major implementations:
+1. Identify affected systems.
+2. Identify dependencies.
+3. Identify server/client boundaries.
+4. Identify reusable abstractions.
+5. Identify potential regressions.
+6. Prefer the smallest viable implementation plan.
+
+---
+
+## Codebase Adaptation
+
+- Match existing naming conventions, patterns, and architecture unless explicitly refactoring.
+- Prefer consistency with the current codebase over idealized architecture.
+- Do not introduce competing patterns into the same subsystem.
+- Reuse existing utilities, hooks, and abstractions whenever possible.
+
+---
+
+## Incremental Change Strategy
+
+- Prefer incremental modifications over large rewrites.
+- Avoid changing unrelated code.
+- Preserve stable APIs unless necessary.
+- Refactor in small verifiable steps.
+- Maintain working application state between changes.
+- Avoid introducing multiple architectural changes simultaneously.
+
+---
+
+## Server / Client Boundary Rules
+
+- Default to Server Components.
+- Only use `"use client"` when interactivity is required.
+- Never pass non-serializable values to Client Components.
+- Keep server-only logic out of client bundles.
+- Avoid unnecessary client state duplication of server data.
+- Keep sensitive logic and secrets server-side.
+
+---
+
+## Data Fetching
+
+- Use **Server Components** for initial data fetching whenever possible.
+- Avoid client-side fetching unless interactivity requires it.
+- Deduplicate fetches through shared data utilities.
+- Validate all external inputs.
+- Use optimistic updates carefully with rollback handling.
+- Keep mutations server-side (Server Actions or API routes).
+
+---
+
+## Project Structure
+
+Use **feature-first** organization:
+
+```
+app/
+features/
+shared/
+entities/
+use-cases/
+infrastructure/
+tests/
+```
+
+Each feature should contain:
+- `components/`
+- `hooks/`
+- `actions/` (Server Actions or API calls)
+- `validation/` (Zod / Valibot schemas)
+- `tests/`
+- `types/`
+
+Avoid deeply nested folders beyond **3 levels**.
+
+---
+
+## Verification Before Completion
+
+Before completing any task:
+
+- Run linting (`next lint` or project-specific lint command).
+- Run typechecking (`tsc --noEmit` or project-specific typecheck).
+- Run relevant tests.
+- Verify imports resolve correctly.
+- Verify no hydration/runtime errors exist.
+- Verify no TypeScript errors exist.
+- Verify no console warnings were introduced.
+- Confirm implementation matches existing architectural patterns.
+- If using Playwright E2E, run the affected spec and inspect trace on failure.
+- If using Next.js DevTools MCP, confirm no compilation or runtime errors are reported.
+
+---
+
+## Failure Recovery
+
+When verification fails:
+1. Inspect logs and runtime errors.
+2. Identify root cause before modifying additional code.
+3. Avoid stacking speculative fixes.
+4. Revert ineffective changes quickly.
+5. Prefer one verified fix at a time.
+
+---
+
+## Completion Criteria
+
+A task is complete only when:
+
+- TypeScript passes.
+- Lint passes.
+- Relevant tests pass.
+- The feature works end-to-end.
+- No placeholder code remains.
+- No obvious regressions were introduced.
+- The implementation follows existing project conventions.
+
+---
+
+## Frontend
+
+### React
+
+- Use **functional components with hooks**; avoid class components.
+- Prefer stable props and predictable renders.
+- Use memoization only when profiling demonstrates benefit.
+- Rely on React Compiler optimizations where applicable.
+- Use `React.lazy()` and `Suspense` for code-splitting.
+- Use `useMemo` for expensive calculations and object/array construction.
+- Use `useId()` for unique accessibility IDs (`htmlFor`, `aria-labelledby`).
+- **React 19**: Use the `use` hook to read **Promises** and **Context** during render. Unlike other hooks, `use` may be called conditionally or inside loops when reading a Promise or Context value.
+- **React 19**: Use `useActionState` for form action state management.
+- **React 19**: Use `useOptimistic` for optimistic UI updates in forms.
+- **React 19**: Use `useTransition` for non-urgent state updates.
+- **React Compiler**: If adopting the compiler, remove manual `useMemo` / `useCallback` and let the compiler auto-memoize. Do not mix manual memoization with compiler-optimized code — the compiler may skip files where existing memoization cannot be preserved. Use the `"use memo"` directive to opt individual files into compilation during incremental adoption.
+- Leverage **Server Components** for {{data_fetching_heavy_components}}.
+- Keep Client Components as leaf nodes; push data fetching upward into Server Components.
+- Co-locate state closest to where it is consumed; avoid prop drilling.
+
+### Next.js
+
+- **Always use App Router** and Server Components by default.
+- Use **route handlers** (`route.ts`) for API endpoints; avoid `pages/api`.
+- Use **Server Actions** (`'use server'`) for form handling and mutations.
+- Use **`next/form`** for progressive enhancement with Server Actions.
+- Use the **`Image` component** with explicit `width`, `height`, and `priority`.
+- Use the **Metadata API** (`export const metadata` or `generateMetadata`).
+- Implement **streaming** and **`Suspense`** boundaries for loading states.
+- Use the **`Link` component** without a child `<a>` tag.
+- Leverage **parallel routes** (`@folder`) for complex layouts.
+- Use **intercepting routes** (`(.)`, `(..)`) for modals and nested UIs.
+- Cache Server Components and data functions with the `'use cache'` directive (Next.js 16+).
+- Use `cacheTag()` and `cacheLife()` alongside `'use cache'` for fine-grained invalidation and expiration.
+- Use `'use cache: private'` for user-specific data that accesses cookies/headers.
+- Use `'use cache: remote'` for shared data cached via a remote cache handler.
+- Note: `cacheLife()` requires the `'use cache'` directive to be present.
+- Use **`generateStaticParams`** for pre-rendered dynamic routes.
+
+### Zustand
+
+- Create **separate stores** for distinct state domains.
+- Use `immer` middleware for complex nested state updates.
+- Implement **selectors** to derive state and prevent re-renders.
+- Use `persist` middleware for `localStorage` / `sessionStorage`. Note: v5 no longer stores initial state at store creation; explicitly call `setState` after creation if hydration timing matters.
+- Use strict TypeScript typing; define store slices with explicit interfaces.
+- Prefer **`useShallow`** from `zustand/shallow` for shallow equality in selectors.
+- **Zustand v5**: The default `create` uses `Object.is` comparison. For shallow equality, either use `useShallow` in components or `createWithEqualityFn` from `zustand/traditional` at store creation.
+- Combine stores using **composition**.
+- Use **subscriptions** (`subscribeWithSelector`) for non-React reactions.
+- Use `devtools` middleware for Redux DevTools in development.
+- Encapsulate store access in **custom hooks** (e.g., `useCartStore`).
+- Keep server state in a separate cache layer (TanStack Query / SWR); use Zustand only for client/UI state.
+- Use `createStore` and Context providers when store instances must be scoped per component tree (e.g., SSR safety).
+
+---
+
+## UI/UX Standards
+
+- Prioritize accessibility and keyboard navigation.
+- Maintain consistent spacing, typography, and visual hierarchy.
+- Prefer responsive layouts by default.
+- Avoid cluttered interfaces.
+- Use loading, empty, and error states consistently.
+- Preserve perceived performance with optimistic or streamed UI when appropriate.
+- Use semantic HTML elements (`<nav>`, `<main>`, `<section>`, `<article>`).
+- Ensure all interactive elements have accessible names (`aria-label`, `aria-labelledby`).
+- Maintain keyboard navigability; visible focus states.
+- Use `prefers-reduced-motion` media queries for animations.
+- Run automated a11y checks via Playwright or axe-core in CI.
+- Do not use `div` or `span` for clickable elements.
+
+---
+
+## Styling & Tailwind CSS
+
+- Use **Tailwind CSS** utility classes for styling; avoid inline styles.
+- Use `@tailwindcss/postcss` or the standard Tailwind setup for Next.js.
+- Prefer `clsx` / `tailwind-merge` for conditional class composition.
+- Use `prettier-plugin-tailwindcss` for automatic class sorting.
+- Maintain consistent spacing and color tokens via `tailwind.config.ts`.
+- Avoid arbitrary values (e.g., `w-[123px]`) unless a design token does not exist.
+- Use responsive prefixes (`sm:`, `md:`, `lg:`) for breakpoint-based styles.
+
+---
+
+## TypeScript
+
+- Use **strict TypeScript mode**.
+- Avoid `any`; prefer `unknown` when necessary.
+- Prefer **inferred types** when obvious.
+- Export **explicit types** for public APIs.
+- Use **discriminated unions** over boolean flags where possible.
+- Validate external data at runtime using **Zod** or **Valibot**.
+- Never trust API responses without validation.
+
+---
+
+## Static Analysis
+
+### Prettier
+
+- Define a consistent `.prettierrc` across all {{project_repositories}}.
+- Format on save; use `.prettierignore` for generated files, build artifacts, and {{specific_excluded_patterns}}.
+- Set `printWidth` between **80–100** characters.
+- Enforce `trailingComma: "es5"` to reduce diff noise.
+- Use `arrowParens: "always"` for consistent formatting.
+- If using Tailwind CSS, include `prettier-plugin-tailwindcss`.
+- Run CI checks to ensure all committed code adheres to the defined style.
+
+---
+
+## ESLint & Code Quality
+
+- Extend `next/core-web-vitals` and `next/typescript` ESLint configs.
+- Add `@typescript-eslint/strict-type-checked` for additional type safety.
+- Enforce the **Rules of Hooks** (`react-hooks/rules-of-hooks`).
+- Enforce **exhaustive deps** (`react-hooks/exhaustive-deps`).
+- Block `console.log` in production via lint rules or CI checks.
+- Use `eslint-plugin-playwright` for Playwright test files.
+- Run lint and typecheck in CI before allowing merge.
+
+---
+
+## Testing
+
+### Playwright (E2E)
+
+- Initialize targeting **Chromium/Desktop Chrome**.
+- Rely on automatic **browser context isolation** per test.
+- Follow the **Page Object Model (POM)**.
+- Use **locators** (`getByRole`, `getByTestId`) over CSS selectors.
+- Validate backend via **API testing** where possible.
+- Use `expect(page).toHaveScreenshot()` for visual regression.
+- Use `codegen` for rapid recording, then refactor into POMs.
+- Use the **trace viewer** for debugging failures.
+- Implement `test.beforeEach` / `test.afterEach` hooks.
+- Use **web-first assertions** (`toBeVisible`, `toHaveText`).
+- Run tests in parallel (`workers: process.env.CI ? 4 : undefined`).
+- Isolate authenticated states with **storage states**.
+- Use **soft assertions** (`expect.soft`) for non-blocking validation of multiple independent conditions.
+
+---
+
+## Performance Guidelines
+
+- Optimize only after correctness and clarity.
+- Avoid premature memoization.
+- Measure before optimizing expensive renders.
+- Minimize client-side JavaScript.
+- Prefer streaming and partial rendering over loading spinners.
+- Avoid unnecessary global state.
+- Use `React.lazy()` and `Suspense` for code-splitting heavy routes or components.
+- Use the Next.js `Image` component with explicit `width`, `height`, and `priority` for LCP images.
+- Leverage the **React Compiler** to reduce manual memoization; keep hook dependencies stable.
+
+---
+
+## Dependency Rules
+
+- Prefer existing project dependencies before adding new packages.
+- Avoid introducing dependencies for trivial utilities.
+- Justify large dependencies before installation.
+- Prefer framework-native solutions when sufficient.
+- Remove unused dependencies during refactors.
+
+---
+
+## Refactoring Standards
+
+- Remove dead code when replacing implementations.
+- Eliminate duplicate logic aggressively.
+- Keep functions focused and small.
+- Prefer composition over inheritance.
+- Extract reusable logic only after repetition is proven.
+- Maintain backward compatibility unless explicitly changing contracts.
+
+---
+
+## Security
+
+- Never hardcode secrets, API keys, or credentials in source code.
+- Keep sensitive logic and authentication checks server-side.
+- Validate all external inputs at runtime with **Zod** or **Valibot** before processing.
+- Sanitize user-generated content before rendering to prevent XSS.
+- Use `next/headers` and `next/cookies` only in Server Components or Server Actions.
+- Prefer HTTPS for all external API calls.
+- Use environment variables for configuration; fail fast if required env vars are missing.
+
+---
+
+## Error Handling & Logging
+
+- Return typed error responses from Server Actions using discriminated unions or a standardized `Result<T, E>` pattern.
+- Use `try/catch` in Server Actions and route handlers; never let unhandled errors leak to the client with stack traces.
+- Surface user-friendly error messages in UI; log full error details server-side.
+- Use Next.js `error.tsx` and `global-error.tsx` for graceful error boundaries.
+- Use `notFound()` for missing data; use `redirect()` for auth guard failures.
+- Do not log sensitive data (PII, tokens, passwords).
+- Prefer structured logging over `console.log` in production.
+
+---
+
+## API Route Handlers (`route.ts`)
+
+- Use the **standard Web APIs** (`Request`, `Response`) inside route handlers.
+- Validate query params and request body with **Zod** before processing.
+- Return consistent response shapes; use appropriate HTTP status codes.
+- Handle `OPTIONS` requests explicitly if CORS is needed.
+- Keep route handlers thin; delegate business logic to services/use cases.
+- Cache GET responses with `cacheTag` and `revalidateTag` where applicable.
+- Protect mutation routes with authentication checks before processing.
+
+---
+
+## Database / ORM
+
+- Prefer **Prisma**, **Drizzle**, or **Supabase** for database access; avoid raw SQL unless necessary.
+- Encapsulate all queries in repository/service functions; do not query directly from components or route handlers.
+- Use **connection pooling** in serverless environments (e.g., PgBouncer, Supabase pooler).
+- Write **migrations** for all schema changes; never modify production schema manually.
+- Index foreign keys and frequently queried columns.
+- Use transactions for multi-step mutations that must be atomic.
+- Keep database logic in the **infrastructure** or **use-cases** layer; never in React components.
+- Sanitize all dynamic inputs; use ORM parameter binding to prevent injection.
+
+---
+
+## Architecture
+
+### ADRs
+
+- Create ADRs at `/docs/adr/{name}.md` for:
+  - Major dependency changes
+  - Architectural pattern changes
+  - New integration patterns
+  - Database schema changes
+
+### Clean Architecture (Apply Selectively)
+
+- Separate code into layers: **entities, use cases, interfaces, frameworks**.
+- Enforce the **Dependency Rule**: code dependencies must point inward. Inner layers know nothing of outer layers.
+- Domain entities must encapsulate {{business_rules}} with **zero framework dependencies**.
+- Use **interfaces (ports)** and **implementations (adapters)** to isolate external dependencies (databases, HTTP clients, third-party APIs).
+- Create **use cases** that orchestrate entity interactions for specific business operations.
+- Implement **mappers/DTOs** to transform data between layers.
+- Apply the **Repository pattern** to abstract data access.
+- Keep framework-specific code (React, Next.js, Express) in the outermost **interface adapter** layer only.
+
+### Domain-Driven Design (Apply Selectively)
+
+- Define **bounded contexts** with explicit boundaries and integration contracts.
+- Use **ubiquitous language** within each context.
+- Create **rich domain models** with behavior, not just data structures, for {{core_domain_entities}}.
+- Use **value objects** for concepts with no identity but defined by their attributes (e.g., `Money`, `Address`).
+- Implement **domain events** to communicate between bounded contexts asynchronously.
+- Use **aggregates** to enforce consistency boundaries and transactional integrity.
+- Apply the **Anti-Corruption Layer** when integrating with external systems or legacy code.
+
+### Advanced Patterns (Use Only When Justified)
+
+> Only apply these when the problem domain explicitly requires them.
+
+- **CQRS / Command-Query separation**: When read and write workloads differ significantly.
+- **Event sourcing**: For audit-heavy domains where full history is required.
+- **Aggregate root invariants**: Only the aggregate root should be loaded directly; protect invariants inside aggregates.
+- **Monolith-to-Microservices migration**: Use bounded contexts to define service boundaries before splitting.
+
+---
+
+## Use Cases & Ideas
+
+### When to apply Clean Architecture + DDD
+
+- **SaaS platforms with complex billing/subscription rules**: Rich domain models for `Subscription`, `Invoice`, `Payment`.
+- **Multi-tenant B2B apps**: Bounded contexts per tenant feature set.
+- **Marketplaces**: Separate `Order`, `Catalog`, `Payment` contexts with domain events.
+
+### When to leverage React 19 + Next.js 16 features
+
+- **Dashboards with heavy data tables**: Server Components for data, `Suspense` for skeletons, `useTransition` for filtering.
+- **E-commerce checkout**: `useOptimistic` for cart, Server Actions for submission, `next/form` for enhancement.
+- **SEO-critical sites**: `generateStaticParams`, Metadata API, prioritized LCP images.
+
+### When to use Zustand effectively
+
+- **Cross-component UI state**: Sidebar, theme, modal toggles.
+- **Feature-flag state**: Persist to `localStorage`.
+- **Multi-step wizards**: Compose step, validation, and draft state.
+
+### When to invest in Playwright E2E
+
+- **Critical user journeys**: Login → Core action → Confirmation.
+- **Design system regression**: `toHaveScreenshot()` across component stories.
+- **Third-party smoke tests**: API testing for webhooks, OAuth, file uploads.
+

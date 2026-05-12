@@ -1,0 +1,14 @@
+---
+description: TypeScript strict mode, type inference, discriminated unions, and runtime validation with Zod/Valibot.
+trigger: always_on
+---
+
+# TypeScript
+
+- Use **strict TypeScript mode**.
+- Avoid `any`; prefer `unknown` when necessary.
+- Prefer **inferred types** when obvious.
+- Export **explicit types** for public APIs.
+- Use **discriminated unions** over boolean flags where possible.
+- Validate external data at runtime using **Zod** or **Valibot**.
+- Never trust API responses without validation.

@@ -1,0 +1,15 @@
+---
+description: Database access patterns, ORM usage, migrations, connection pooling, and query encapsulation.
+trigger: database, ORM, Prisma, Drizzle, Supabase, query, migration, schema, transaction, connection pool, repository
+---
+
+# Database / ORM
+
+- Prefer **Prisma**, **Drizzle**, or **Supabase** for database access; avoid raw SQL unless necessary.
+- Encapsulate all queries in repository/service functions; do not query directly from components or route handlers.
+- Use **connection pooling** in serverless environments (e.g., PgBouncer, Supabase pooler).
+- Write **migrations** for all schema changes; never modify production schema manually.
+- Index foreign keys and frequently queried columns.
+- Use transactions for multi-step mutations that must be atomic.
+- Keep database logic in the **infrastructure** or **use-cases** layer; never in React components.
+- Sanitize all dynamic inputs; use ORM parameter binding to prevent injection.

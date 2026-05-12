@@ -1,0 +1,14 @@
+---
+description: Error handling patterns for Server Actions, route handlers, error boundaries, and logging.
+trigger: error, error boundary, try/catch, error.tsx, global-error, logging, Result, notFound, redirect, catch
+---
+
+# Error Handling & Logging
+
+- Return typed error responses from Server Actions using discriminated unions or a standardized `Result<T, E>` pattern.
+- Use `try/catch` in Server Actions and route handlers; never let unhandled errors leak to the client with stack traces.
+- Surface user-friendly error messages in UI; log full error details server-side.
+- Use Next.js `error.tsx` and `global-error.tsx` for graceful error boundaries.
+- Use `notFound()` for missing data; use `redirect()` for auth guard failures.
+- Do not log sensitive data (PII, tokens, passwords).
+- Prefer structured logging over `console.log` in production.

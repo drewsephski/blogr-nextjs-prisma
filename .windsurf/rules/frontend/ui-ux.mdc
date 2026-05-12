@@ -1,0 +1,19 @@
+---
+description: UI/UX quality standards including accessibility, responsive design, loading states, and semantic HTML.
+trigger: UI, UX, accessibility, a11y, responsive, layout, design, loading, empty, error, semantic HTML, aria, keyboard, focus
+---
+
+# UI/UX Standards
+
+- Prioritize accessibility and keyboard navigation.
+- Maintain consistent spacing, typography, and visual hierarchy.
+- Prefer responsive layouts by default.
+- Avoid cluttered interfaces.
+- Use loading, empty, and error states consistently.
+- Preserve perceived performance with optimistic or streamed UI when appropriate.
+- Use semantic HTML elements (`<nav>`, `<main>`, `<section>`, `<article>`).
+- Ensure all interactive elements have accessible names (`aria-label`, `aria-labelledby`).
+- Maintain keyboard navigability; visible focus states.
+- Use `prefers-reduced-motion` media queries for animations.
+- Run automated a11y checks via Playwright or axe-core in CI.
+- Do not use `div` or `span` for clickable elements.

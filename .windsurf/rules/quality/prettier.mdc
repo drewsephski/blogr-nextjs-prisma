@@ -1,0 +1,14 @@
+---
+description: Prettier formatting configuration, print width, trailing commas, and Tailwind plugin.
+trigger: Prettier, format, .prettierrc, printWidth, trailing comma, arrowParens, prettier-plugin-tailwindcss
+---
+
+# Prettier
+
+- Define a consistent `.prettierrc` across all project repositories.
+- Format on save; use `.prettierignore` for generated files, build artifacts, and specific excluded patterns.
+- Set `printWidth` between **80–100** characters.
+- Enforce `trailingComma: "es5"` to reduce diff noise.
+- Use `arrowParens: "always"` for consistent formatting.
+- If using Tailwind CSS, include `prettier-plugin-tailwindcss`.
+- Run CI checks to ensure all committed code adheres to the defined style.

@@ -1,0 +1,69 @@
+---
+description: Planning, task classification, codebase adaptation, and incremental change strategy. Loaded before major implementations.
+trigger: always_on
+---
+
+# Planning & Adaptation
+
+## Before Writing Code
+
+Before implementing:
+1. Analyze existing patterns in the codebase.
+2. Reuse existing abstractions when possible.
+3. Identify whether functionality already exists.
+4. Minimize duplicate logic.
+5. Prefer modifying existing code over creating parallel systems.
+
+---
+
+## Task Classification
+
+Before implementation, classify the task:
+
+- **Bug Fix**
+- **Refactor**
+- **New Feature**
+- **Performance Optimization**
+- **Architecture Change**
+- **Dependency Upgrade**
+- **UI/UX Improvement**
+- **Test Coverage**
+- **DevOps / Infrastructure**
+
+Adjust implementation scope accordingly:
+- Bug fixes → minimal targeted changes.
+- Refactors → preserve behavior.
+- New features → integrate with existing patterns first.
+- Architecture changes → require ADRs and migration planning.
+
+---
+
+## Planning Requirements
+
+Before major implementations:
+1. Identify affected systems.
+2. Identify dependencies.
+3. Identify server/client boundaries.
+4. Identify reusable abstractions.
+5. Identify potential regressions.
+6. Prefer the smallest viable implementation plan.
+
+---
+
+## Codebase Adaptation
+
+- Match existing naming conventions, patterns, and architecture unless explicitly refactoring.
+- Prefer consistency with the current codebase over idealized architecture.
+- Do not introduce competing patterns into the same subsystem.
+- Reuse existing utilities, hooks, and abstractions whenever possible.
+
+---
+
+## Incremental Change Strategy
+
+- Prefer incremental modifications over large rewrites.
+- Avoid changing unrelated code.
+- Preserve stable APIs unless necessary.
+- Refactor in small verifiable steps.
+- Maintain working application state between changes.
+- Avoid introducing multiple architectural changes simultaneously.

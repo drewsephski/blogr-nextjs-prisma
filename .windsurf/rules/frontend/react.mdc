@@ -1,0 +1,22 @@
+---
+description: React 19 and React Compiler best practices. Loaded when working with React components, hooks, or JSX.
+trigger: React, component, hook, JSX, useState, useEffect, useCallback, useMemo, memo, Suspense, lazy
+---
+
+# React
+
+- Use **functional components with hooks**; avoid class components.
+- Prefer stable props and predictable renders.
+- Use memoization only when profiling demonstrates benefit.
+- Rely on React Compiler optimizations where applicable.
+- Use `React.lazy()` and `Suspense` for code-splitting.
+- Use `useMemo` for expensive calculations and object/array construction.
+- Use `useId()` for unique accessibility IDs (`htmlFor`, `aria-labelledby`).
+- **React 19**: Use the `use` hook to read **Promises** and **Context** during render. Unlike other hooks, `use` may be called conditionally or inside loops when reading a Promise or Context value.
+- **React 19**: Use `useActionState` for form action state management.
+- **React 19**: Use `useOptimistic` for optimistic UI updates in forms.
+- **React 19**: Use `useTransition` for non-urgent state updates.
+- **React Compiler**: If adopting the compiler, remove manual `useMemo` / `useCallback` and let the compiler auto-memoize. Do not mix manual memoization with compiler-optimized code — the compiler may skip files where existing memoization cannot be preserved. Use the `"use memo"` directive to opt individual files into compilation during incremental adoption.
+- Leverage **Server Components** for data-fetching-heavy components.
+- Keep Client Components as leaf nodes; push data fetching upward into Server Components.
+- Co-locate state closest to where it is consumed; avoid prop drilling.

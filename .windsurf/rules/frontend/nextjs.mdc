@@ -1,0 +1,43 @@
+---
+description: Next.js 16 App Router, Server Components, Server Actions, caching, and routing patterns.
+trigger: Next.js, App Router, Server Component, Server Action, route handler, page, layout, metadata, Link, Image, Suspense, generateStaticParams, use cache, cacheTag, cacheLife
+---
+
+# Next.js
+
+## Server / Client Boundaries
+
+- Default to Server Components.
+- Only use `"use client"` when interactivity is required.
+- Never pass non-serializable values to Client Components.
+- Keep server-only logic out of client bundles.
+- Avoid unnecessary client state duplication of server data.
+- Keep sensitive logic and secrets server-side.
+
+## Data Fetching
+
+- Use **Server Components** for initial data fetching whenever possible.
+- Avoid client-side fetching unless interactivity requires it.
+- Deduplicate fetches through shared data utilities.
+- Validate all external inputs.
+- Use optimistic updates carefully with rollback handling.
+- Keep mutations server-side (Server Actions or API routes).
+
+## Routing & Components
+
+- **Always use App Router** and Server Components by default.
+- Use **route handlers** (`route.ts`) for API endpoints; avoid `pages/api`.
+- Use **Server Actions** (`'use server'`) for form handling and mutations.
+- Use **`next/form`** for progressive enhancement with Server Actions.
+- Use the **`Image` component** with explicit `width`, `height`, and `priority`.
+- Use the **Metadata API** (`export const metadata` or `generateMetadata`).
+- Implement **streaming** and **`Suspense`** boundaries for loading states.
+- Use the **`Link` component** without a child `<a>` tag.
+- Leverage **parallel routes** (`@folder`) for complex layouts.
+- Use **intercepting routes** (`(.)`, `(..)`) for modals and nested UIs.
+- Cache Server Components and data functions with the `'use cache'` directive (Next.js 16+).
+- Use `cacheTag()` and `cacheLife()` alongside `'use cache'` for fine-grained invalidation and expiration.
+- Use `'use cache: private'` for user-specific data that accesses cookies/headers.
+- Use `'use cache: remote'` for shared data cached via a remote cache handler.
+- Note: `cacheLife()` requires the `'use cache'` directive to be present.
+- Use **`generateStaticParams`** for pre-rendered dynamic routes.

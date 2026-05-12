@@ -1,0 +1,41 @@
+---
+description: Advanced architectural patterns and use-case guidance. Only apply when explicitly justified.
+trigger: CQRS, event sourcing, microservices, monolith, migration, audit, advanced pattern, architecture change
+---
+
+# Advanced Patterns (Use Only When Justified)
+
+> Only apply these when the problem domain explicitly requires them.
+
+- **CQRS / Command-Query separation**: When read and write workloads differ significantly.
+- **Event sourcing**: For audit-heavy domains where full history is required.
+- **Aggregate root invariants**: Only the aggregate root should be loaded directly; protect invariants inside aggregates.
+- **Monolith-to-Microservices migration**: Use bounded contexts to define service boundaries before splitting.
+
+---
+
+## Use Cases & Ideas
+
+### When to apply Clean Architecture + DDD
+
+- **SaaS platforms with complex billing/subscription rules**: Rich domain models for `Subscription`, `Invoice`, `Payment`.
+- **Multi-tenant B2B apps**: Bounded contexts per tenant feature set.
+- **Marketplaces**: Separate `Order`, `Catalog`, `Payment` contexts with domain events.
+
+### When to leverage React 19 + Next.js 16 features
+
+- **Dashboards with heavy data tables**: Server Components for data, `Suspense` for skeletons, `useTransition` for filtering.
+- **E-commerce checkout**: `useOptimistic` for cart, Server Actions for submission, `next/form` for enhancement.
+- **SEO-critical sites**: `generateStaticParams`, Metadata API, prioritized LCP images.
+
+### When to use Zustand effectively
+
+- **Cross-component UI state**: Sidebar, theme, modal toggles.
+- **Feature-flag state**: Persist to `localStorage`.
+- **Multi-step wizards**: Compose step, validation, and draft state.
+
+### When to invest in Playwright E2E
+
+- **Critical user journeys**: Login → Core action → Confirmation.
+- **Design system regression**: `toHaveScreenshot()` across component stories.
+- **Third-party smoke tests**: API testing for webhooks, OAuth, file uploads.

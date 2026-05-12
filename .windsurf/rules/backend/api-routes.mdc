@@ -1,0 +1,14 @@
+---
+description: Next.js API route handlers, validation, caching, and security for `route.ts` files.
+trigger: route.ts, route handler, API, endpoint, Request, Response, cacheTag, revalidateTag, CORS
+---
+
+# API Route Handlers (`route.ts`)
+
+- Use the **standard Web APIs** (`Request`, `Response`) inside route handlers.
+- Validate query params and request body with **Zod** before processing.
+- Return consistent response shapes; use appropriate HTTP status codes.
+- Handle `OPTIONS` requests explicitly if CORS is needed.
+- Keep route handlers thin; delegate business logic to services/use cases.
+- Cache GET responses with `cacheTag` and `revalidateTag` where applicable.
+- Protect mutation routes with authentication checks before processing.

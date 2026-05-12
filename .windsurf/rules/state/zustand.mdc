@@ -1,0 +1,20 @@
+---
+description: Zustand v5 state management best practices, selectors, middleware, and SSR safety.
+trigger: Zustand, store, state management, useStore, create, persist, immer, shallow, useShallow, subscribeWithSelector
+---
+
+# Zustand
+
+- Create **separate stores** for distinct state domains.
+- Use `immer` middleware for complex nested state updates.
+- Implement **selectors** to derive state and prevent re-renders.
+- Use `persist` middleware for `localStorage` / `sessionStorage`. Note: v5 no longer stores initial state at store creation; explicitly call `setState` after creation if hydration timing matters.
+- Use strict TypeScript typing; define store slices with explicit interfaces.
+- Prefer **`useShallow`** from `zustand/shallow` for shallow equality in selectors.
+- **Zustand v5**: The default `create` uses `Object.is` comparison. For shallow equality, either use `useShallow` in components or `createWithEqualityFn` from `zustand/traditional` at store creation.
+- Combine stores using **composition**.
+- Use **subscriptions** (`subscribeWithSelector`) for non-React reactions.
+- Use `devtools` middleware for Redux DevTools in development.
+- Encapsulate store access in **custom hooks** (e.g., `useCartStore`).
+- Keep server state in a separate cache layer (TanStack Query / SWR); use Zustand only for client/UI state.
+- Use `createStore` and Context providers when store instances must be scoped per component tree (e.g., SSR safety).

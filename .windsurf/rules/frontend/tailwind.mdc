@@ -1,0 +1,14 @@
+---
+description: Tailwind CSS styling conventions, class composition, and responsive design.
+trigger: Tailwind, CSS, style, className, clsx, tailwind-merge, responsive, breakpoint
+---
+
+# Styling & Tailwind CSS
+
+- Use **Tailwind CSS** utility classes for styling; avoid inline styles.
+- Use `@tailwindcss/postcss` or the standard Tailwind setup for Next.js.
+- Prefer `clsx` / `tailwind-merge` for conditional class composition.
+- Use `prettier-plugin-tailwindcss` for automatic class sorting.
+- Maintain consistent spacing and color tokens via `tailwind.config.ts`.
+- Avoid arbitrary values (e.g., `w-[123px]`) unless a design token does not exist.
+- Use responsive prefixes (`sm:`, `md:`, `lg:`) for breakpoint-based styles.

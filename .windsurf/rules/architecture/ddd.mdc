@@ -1,0 +1,14 @@
+---
+description: Domain-Driven Design patterns including bounded contexts, aggregates, domain events, and ubiquitous language. Apply selectively.
+trigger: DDD, bounded context, ubiquitous language, aggregate, domain event, value object, entity, Anti-Corruption Layer, event sourcing
+---
+
+# Domain-Driven Design (Apply Selectively)
+
+- Define **bounded contexts** with explicit boundaries and integration contracts.
+- Use **ubiquitous language** within each context.
+- Create **rich domain models** with behavior, not just data structures.
+- Use **value objects** for concepts with no identity but defined by their attributes (e.g., `Money`, `Address`).
+- Implement **domain events** to communicate between bounded contexts asynchronously.
+- Use **aggregates** to enforce consistency boundaries and transactional integrity.
+- Apply the **Anti-Corruption Layer** when integrating with external systems or legacy code.

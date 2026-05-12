@@ -1,0 +1,29 @@
+---
+description: Debugging hierarchy and confidence protocols. Guides the agent through systematic root-cause analysis.
+trigger: always_on
+---
+
+# Debugging & Confidence
+
+## Confidence & Verification
+
+- If uncertain about an API or framework behavior, verify with MCP tools or official documentation.
+- Do not assume undocumented framework behavior.
+- Escalate uncertainty through comments or notes rather than fabricating implementations.
+- Prefer explicit verification over probabilistic guessing.
+
+---
+
+## Debugging Hierarchy
+
+When debugging:
+1. Check runtime errors.
+2. Check TypeScript errors.
+3. Check imports and paths.
+4. Check environment variables.
+5. Check server/client boundaries.
+6. Check async data flow.
+7. Check framework conventions.
+8. Check external dependencies last.
+
+Do not assume framework bugs before verifying implementation errors.

@@ -1,0 +1,14 @@
+---
+description: ESLint configuration, rules of hooks, exhaustive deps, and Playwright-specific lint rules.
+trigger: ESLint, lint, eslint-plugin, rules of hooks, exhaustive deps, core-web-vitals, typescript, console.log
+---
+
+# ESLint & Code Quality
+
+- Extend `next/core-web-vitals` and `next/typescript` ESLint configs.
+- Add `@typescript-eslint/strict-type-checked` for additional type safety.
+- Enforce the **Rules of Hooks** (`react-hooks/rules-of-hooks`).
+- Enforce **exhaustive deps** (`react-hooks/exhaustive-deps`).
+- Block `console.log` in production via lint rules or CI checks.
+- Use `eslint-plugin-playwright` for Playwright test files.
+- Run lint and typecheck in CI before allowing merge.

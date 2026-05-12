@@ -1,0 +1,37 @@
+---
+description: Performance optimization, dependency discipline, refactoring standards, and React Compiler usage.
+trigger: performance, optimize, memoization, memo, lazy, Suspense, Image, LCP, bundle, dependency, refactor, dead code, duplicate, composition
+---
+
+# Performance Guidelines
+
+- Optimize only after correctness and clarity.
+- Avoid premature memoization.
+- Measure before optimizing expensive renders.
+- Minimize client-side JavaScript.
+- Prefer streaming and partial rendering over loading spinners.
+- Avoid unnecessary global state.
+- Use `React.lazy()` and `Suspense` for code-splitting heavy routes or components.
+- Use the Next.js `Image` component with explicit `width`, `height`, and `priority` for LCP images.
+- Leverage the **React Compiler** to reduce manual memoization; keep hook dependencies stable.
+
+---
+
+# Dependency Rules
+
+- Prefer existing project dependencies before adding new packages.
+- Avoid introducing dependencies for trivial utilities.
+- Justify large dependencies before installation.
+- Prefer framework-native solutions when sufficient.
+- Remove unused dependencies during refactors.
+
+---
+
+# Refactoring Standards
+
+- Remove dead code when replacing implementations.
+- Eliminate duplicate logic aggressively.
+- Keep functions focused and small.
+- Prefer composition over inheritance.
+- Extract reusable logic only after repetition is proven.
+- Maintain backward compatibility unless explicitly changing contracts.

@@ -1,0 +1,14 @@
+---
+description: Security hardening, secrets management, input validation, XSS prevention, and auth boundaries.
+trigger: security, secret, API key, credential, auth, authentication, XSS, sanitize, validation, HTTPS, environment variable, env
+---
+
+# Security
+
+- Never hardcode secrets, API keys, or credentials in source code.
+- Keep sensitive logic and authentication checks server-side.
+- Validate all external inputs at runtime with **Zod** or **Valibot** before processing.
+- Sanitize user-generated content before rendering to prevent XSS.
+- Use `next/headers` and `next/cookies` only in Server Components or Server Actions.
+- Prefer HTTPS for all external API calls.
+- Use environment variables for configuration; fail fast if required env vars are missing.

@@ -1,0 +1,28 @@
+---
+description: Feature-first project structure, folder organization, and nesting conventions.
+trigger: project structure, folder, directory, feature, organization, app/, features/, entities/, use-cases/, infrastructure/
+---
+
+# Project Structure
+
+Use **feature-first** organization:
+
+```
+app/
+features/
+shared/
+entities/
+use-cases/
+infrastructure/
+tests/
+```
+
+Each feature should contain:
+- `components/`
+- `hooks/`
+- `actions/` (Server Actions or API calls)
+- `validation/` (Zod / Valibot schemas)
+- `tests/`
+- `types/`
+
+Avoid deeply nested folders beyond **3 levels**.
