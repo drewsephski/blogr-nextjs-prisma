@@ -15,12 +15,17 @@ export default async function FeedPage() {
   });
 
   return (
-    <div className="stack">
-      <h1>Public Feed</h1>
+    <div className="stack-lg">
+      <div className="feed-header">
+        <h1>Feed</h1>
+        <p>Published posts from the community</p>
+      </div>
       {feed.length ? (
         feed.map((post: PostCardData) => <PostCard key={post.id} post={post} />)
       ) : (
-        <div className="panel">No published posts yet.</div>
+        <div className="empty-state">
+          <p>No published posts yet.</p>
+        </div>
       )}
     </div>
   );

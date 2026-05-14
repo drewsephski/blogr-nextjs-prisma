@@ -27,27 +27,31 @@ export default async function PostPage({ params }: PostPageProps) {
   }
 
   const postBelongsToUser = user?.id === post.authorId;
-  const title = post.published ? post.title : `${post.title} (Draft)`;
 
   return (
-    <article className="panel">
-      <h1>{title}</h1>
-      <p className="meta">By {post.author?.name ?? "Unknown author"}</p>
-      <ReactMarkdown>{post.content}</ReactMarkdown>
-      {postBelongsToUser ? (
+    <article>
+      <div className="article-header">
+        {!post.published && <span className="badge">Draft</span>}
+        <h1>{post.title}</h1>
+        <p className="meta">By {post.author?.name ?? "Unknown author"}</p>
+      </div>
+      <div className="prose">
+        <ReactMarkdown>{post.content}</ReactMarkdown>
+      </div>
+      {postBelongsToUser && (
         <div className="actions">
-          {!post.published ? (
+          {!post.published && (
             <form action={publishPost.bind(null, post.id)}>
               <button type="submit">Publish</button>
             </form>
-          ) : null}
+          )}
           <form action={deletePost.bind(null, post.id)}>
-            <button className="secondary" type="submit">
+            <button className="danger" type="submit">
               Delete
             </button>
           </form>
         </div>
-      ) : null}
+      )}
     </article>
   );
 }

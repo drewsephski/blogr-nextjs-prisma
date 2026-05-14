@@ -7,9 +7,8 @@ export default async function DraftsPage() {
 
   if (!user) {
     return (
-      <div className="panel">
-        <h1>My Drafts</h1>
-        <p>You need to be authenticated to view this page.</p>
+      <div className="empty-state">
+        <p>You need to be signed in to view your drafts.</p>
       </div>
     );
   }
@@ -28,12 +27,17 @@ export default async function DraftsPage() {
   });
 
   return (
-    <div className="stack">
-      <h1>My Drafts</h1>
+    <div className="stack-lg">
+      <div className="feed-header">
+        <h1>Drafts</h1>
+        <p>Your unpublished posts</p>
+      </div>
       {drafts.length ? (
         drafts.map((post: PostCardData) => <PostCard key={post.id} post={post} />)
       ) : (
-        <div className="panel">You do not have any drafts yet.</div>
+        <div className="empty-state">
+          <p>No drafts yet. Start writing something new.</p>
+        </div>
       )}
     </div>
   );

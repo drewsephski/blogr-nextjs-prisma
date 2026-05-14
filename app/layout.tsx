@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { getCurrentUser } from "@/lib/auth";
+import { ThemeToggle } from "@/components/theme-toggle";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -17,27 +18,31 @@ export default async function RootLayout({
   const user = await getCurrentUser();
 
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body>
         <header className="header">
+          <Link href="/" className="logo">
+            Blogr
+          </Link>
           <nav className="nav" aria-label="Main navigation">
-            <Link href="/">Feed</Link>
-            {user ? <Link href="/drafts">My drafts</Link> : null}
+            {user ? <Link href="/drafts">Drafts</Link> : null}
           </nav>
           <div className="header-actions">
+            <ThemeToggle />
             {user ? (
               <>
-                <span className="user">{user.name ?? user.email}</span>
                 <Link className="button secondary" href="/create">
                   New post
                 </Link>
                 <form action="/api/auth/signout" method="post">
-                  <button type="submit">Log out</button>
+                  <button type="submit" className="secondary">
+                    Log out
+                  </button>
                 </form>
               </>
             ) : (
               <Link className="button" href="/api/auth/authorize">
-                Sign in with Vercel
+                Sign in
               </Link>
             )}
           </div>
