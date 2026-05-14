@@ -1,5 +1,5 @@
 import PostCard, { type PostCardData } from "@/components/post-card";
-import { getCurrentUser } from "@/lib/auth";
+import { getCurrentUser } from "@/lib/session";
 import prisma from "@/lib/prisma";
 
 export default async function DraftsPage() {

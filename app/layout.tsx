@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { getCurrentUser } from "@/lib/auth";
+import { getCurrentUser } from "@/lib/session";
+import { signOutAction } from "@/app/actions";
 import { ThemeToggle } from "@/components/theme-toggle";
 import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Blogr",
   description:
-    "A fullstack blog built with Next.js, Prisma, Sign in with Vercel, and Prisma Postgres.",
+    "A fullstack blog built with Next.js, Better Auth, and Prisma Postgres.",
 };
 
 export default async function RootLayout({
@@ -34,14 +35,14 @@ export default async function RootLayout({
                 <Link className="button secondary" href="/create">
                   New post
                 </Link>
-                <form action="/api/auth/signout" method="post">
+                <form action={signOutAction}>
                   <button type="submit" className="secondary">
                     Log out
                   </button>
                 </form>
               </>
             ) : (
-              <Link className="button" href="/api/auth/authorize">
+              <Link className="button" href="/login">
                 Sign in
               </Link>
             )}

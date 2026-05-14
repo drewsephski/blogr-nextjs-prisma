@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { createPost } from "@/app/actions";
-import { getCurrentUser } from "@/lib/auth";
+import { getCurrentUser } from "@/lib/session";
 
 export default async function CreatePage() {
   const user = await getCurrentUser();

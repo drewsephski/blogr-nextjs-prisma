@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 import { deletePost, publishPost } from "@/app/actions";
-import { getCurrentUser } from "@/lib/auth";
+import { getCurrentUser } from "@/lib/session";
 import prisma from "@/lib/prisma";
 
 type PostPageProps = {

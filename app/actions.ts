@@ -2,14 +2,15 @@
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { getCurrentUser } from "@/lib/auth";
+import { getCurrentUser } from "@/lib/session";
+import { signOut } from "@/lib/auth-client";
 import prisma from "@/lib/prisma";
 
 export async function createPost(formData: FormData) {
   const user = await getCurrentUser();
 
   if (!user) {
-    redirect("/api/auth/authorize");
+    redirect("/login");
   }
 
   const title = String(formData.get("title") ?? "").trim();
@@ -35,7 +36,7 @@ export async function publishPost(id: string) {
   const user = await getCurrentUser();
 
   if (!user) {
-    redirect("/api/auth/authorize");
+    redirect("/login");
   }
 
   const post = await prisma.post.findUnique({
@@ -62,7 +63,7 @@ export async function deletePost(id: string) {
   const user = await getCurrentUser();
 
   if (!user) {
-    redirect("/api/auth/authorize");
+    redirect("/login");
   }
 
   const post = await prisma.post.findUnique({
@@ -78,5 +79,10 @@ export async function deletePost(id: string) {
 
   revalidatePath("/");
   revalidatePath("/drafts");
+  redirect("/");
+}
+
+export async function signOutAction() {
+  await signOut();
   redirect("/");
 }
